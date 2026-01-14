@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="mb-4 fw-bold">🛒 Keranjang Belanja</h3>
+
+{% if products %}
+<table class="table align-middle">
+    <thead>
+        <tr>
+            <th>Produk</th>
+            <th>Harga</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>
+                <img src="{{ p.thumbnail }}" width="60" class="me-2">
+                {{ p.title }}
+            </td>
+            <td class="fw-bold text-primary">
+                $ {{ p.price }}
+            </td>
+            <td>
+                <a href="/remove-from-cart/{{ p.id }}" class="btn btn-sm btn-danger">
+                    Hapus
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-end">
+    <h5>Total: <span class="text-primary">$ {{ total }}</span></h5>
+    <a href="/checkout/{{ products[0].id }}" class="btn btn-primary mt-2">
+        Lanjut Checkout
+    </a>
+</div>
+
+{% else %}
+<div class="alert alert-info text-center p-4">
+    <h5>🛒 Keranjang masih kosong</h5>
+    <p class="mb-3">Yuk, mulai belanja produk favoritmu di AdanPedia!</p>
+    <a href="/" class="btn btn-primary">
+        🔙 Kembali ke Home
+    </a>
+</div>
+{% endif %}
+
+
+{% endblock %}

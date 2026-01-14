@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="get" class="d-flex gap-3 mb-3">
+    <select name="category" class="form-select w-auto" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+
+        {% for cat in categories %}
+        <option value="{{ cat['slug'] }}"
+            {% if selected_category == cat['slug'] %}selected{% endif %}>
+            {{ cat['name'] | title }}
+        </option>
+        {% endfor %}
+    </select>
+</form>
+
+
+
+<div class="row">
+    {% for p in products %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card product-card h-100">
+            <img src="{{ p.thumbnail }}" class="product-img">
+
+            <div class="card-body">
+                <h6 class="product-title">{{ p.title }}</h6>
+
+                <p class="text-muted small mb-1">
+                    🏷 {{ p.category }}
+                </p>
+
+                <p class="price">$ {{ p.price }}</p>
+
+                <p class="rating">
+                    ⭐ {{ p.rating }} ({{ p.stock }} reviews)
+                </p>
+            </div>
+
+            <div class="card-footer bg-white border-0 d-flex gap-2">
+                <a href="/product/{{ p.id }}" class="btn btn-outline-primary btn-sm w-50">
+                    View Details
+                </a>
+                <a href="/add-to-cart/{{ p.id }}" class="btn btn-primary btn-sm w-50">
+                    Add to Cart
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
