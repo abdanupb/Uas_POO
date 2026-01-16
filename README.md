@@ -1,5 +1,5 @@
 # Uas_POO
-# AdanPedia 🛒
+# AdanPedia 
 
 AdanPedia adalah aplikasi web e-commerce sederhana yang dibangun menggunakan Flask dan API publik DummyJSON.
 
